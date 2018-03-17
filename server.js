@@ -11,13 +11,13 @@ client.connect( (error) => {
 	if (error) { console.log('error yo: ', error) } else { console.log('connected to db') }
 });
 
+
+
 //body-parser functionality
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : false }));
-
-
 app.use(express.static(path.join(__dirname, 'front-end/build')));
-// app.use('/', routes)
+app.use('/', routes)
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/front-end/build/index.html'));
