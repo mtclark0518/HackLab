@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import LINKED_IN_VARIABLES  from './environment/env';
-import LoginButton from './components/LoginButton';
 
 class App extends Component {
   render() {
-    const test = 'heeeeeeeeeeee'
-    console.log(LINKED_IN_VARIABLES);
 
     
     return (
