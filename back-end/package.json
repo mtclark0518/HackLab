@@ -1,11 +1,12 @@
 {
   "name": "gaac",
   "version": "1.0.0",
-  "description": "'GAC' is a lightweight, mobile-first web application that allows current and past students of the General Assembly program to develop partnerships, manage projects, and maintain communication, all on one easy to use platform.",
-  "main": "index.js",
+  "description": "General Assembly Alumni Connect",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"cd back-end && npm start\" \"cd front-end && npm start\""
+    "start": "node server.js",
+    "heroku-postbuild": "cd front-end && npm install --only=dev && npm install && npm run build"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,11 @@
     "url": "https://github.com/mtclark0518/gaac/issues"
   },
   "homepage": "https://github.com/mtclark0518/gaac#readme",
-  "dependencies": {}
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "pg": "^7.4.1",
+    "sequelize": "^4.37.1"
+  }
 }
