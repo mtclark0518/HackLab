@@ -1,14 +1,12 @@
 module.exports = (sequelize, Sequelize) => {
-    const model = sequelize.define('User', {
+    const model = sequelize.define('Profile', {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        linkedinId: {
-            type: Sequelize.STRING,
-            
-
+        name: {
+            type: Sequelize.STRING
         },
         block: {
             type: Sequelize.STRING
