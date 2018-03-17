@@ -13,11 +13,11 @@ client.connect( (error) => {
 //body-parser functionality
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : false }));
-app.use(express.static(path.join(__dirname +  '../front-end/public')));
+app.use(express.static(path.join(__dirname +  '../front-end/build')));
 app.use('/', routes);
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname + '../front-end/public/index.html'));
+    res.sendFile(path.join(__dirname + '../front-end/build/index.html'));
 });
 
 app.listen(PORT, () => console.log('Gettin Schwifty On ' + PORT));
