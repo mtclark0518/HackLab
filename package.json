@@ -1,0 +1,28 @@
+{
+  "name": "gaac",
+  "version": "1.0.0",
+  "description": "General Assembly Alumni Connect",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mtclark0518/gaac.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mtclark0518/gaac/issues"
+  },
+  "homepage": "https://github.com/mtclark0518/gaac#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "pg": "^7.4.1",
+    "sequelize": "^4.37.1"
+  }
+}
