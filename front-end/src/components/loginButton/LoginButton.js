@@ -26,27 +26,34 @@ class LoginButton extends Component {
     this.createProfile(data)
   */
   getProfileData() {
-    IN.API.Raw("/people/~").result(onSuccess).error(onError)
+    window.IN.API.Raw("/people/~")
+      .result(this.onSuccess)
+      .error(this.onError)
+  }
+
+  onSuccess(data) {
+    console.log(data)
+  }
+
+  onError(error) {
+    console.log(error)
   }
 
   onLinkedInLoad() {
-    IN.Event.on(IN, "auth", this.getProfileData)
-      .then(data => {
-        console.log(data);
-      })
-      .catch(error => {
-        console.log(error);
-      })
+    // e.preventDefault();
+    //console.log("hit the linkedin button");
+
+    window.IN.Event.on(window.IN, "auth", this.getProfileData);
   }
 
-  componentWillMount() {
-    this.onLinkedInLoad()
+  componentDidMount() {
+    // this.onLinkedInLoad()
   } 
   /*
     <script type="text/javascript">
       // Setup an event listener to make an API call once auth is complete
       function onLinkedInLoad() {
-        IN.Event.on(IN, "auth", getProfileData);
+        
       }
       // Handle the successful return from the API call
       function onSuccess(data) {
@@ -62,10 +69,19 @@ class LoginButton extends Component {
       }
     </script>
   */
+  /*
+    
+  */
 
   render() {
     return (
-      <script type="in/Login"></script>
+    <div>
+        <script src="//platform.linkedin.com/in.js">
+                api_key: 86gb2jnfy6g3ek
+                onLoad: onLinkedInLoad
+            </script>
+        <script type="IN/Login"></script>
+    </div>
     )
   }
 }
