@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "autobind": "^1.0.3",
     "lodash-fp": "^0.10.4",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
