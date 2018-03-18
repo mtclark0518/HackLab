@@ -5,10 +5,10 @@ const routes = require('./back-end/config/routes');
 const {Client} = require('pg')
 const PORT = process.env.PORT || 8080
 
-const client = new Client({ connectionString: process.env.DATABASE_URL });
-client.connect( (error) => {
-	if (error) { console.log('error yo: ', error) } else { console.log('connected to db') }
-});
+// const client = new Client({ connectionString: process.env.DATABASE_URL });
+// client.connect( (error) => {
+// 	if (error) { console.log('error yo: ', error) } else { console.log('connected to db') }
+// });
 
 //body-parser functionality
 app.use(bodyParser.json());

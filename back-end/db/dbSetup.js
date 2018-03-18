@@ -1,10 +1,12 @@
-/*
- *  Setup the db (init the tables to default/empty )
- */
-var Sequelize = require('sequelize');
-var db = require('../models');
+// var Sequelize = require('sequelize');
+// const sequelize = new Sequelize(process.env.DATABASE_URL || 'postgres://t@localhost:5432/gaac', null, null, {
+//     dialect: 'postgres',
+//     operatorsAliases : false
+// });
+var db = require('../models/index');
 
-db.sequelize.sync( { force: true } )
+
+db.sequelize.sync({ force: true })
     .then( () => {
         process.exit();
     });
