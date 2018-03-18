@@ -1,5 +1,5 @@
 {
-  "name": "GAHackLab",
+  "name": "gaac",
   "version": "1.0.0",
   "description": "General Assembly Social Network",
   "main": "server.js",
