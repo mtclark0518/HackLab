@@ -17,78 +17,24 @@ class LoginButton extends Component {
       })
   }
 
-  /*
-    const data =  {
-      firstName: "Courtney",
-      lastName: "Fay",
-      headline: "Front-End Web Developer",
-      linkedInId: "THI5I54T3ST"
-    };
-    this.createProfile(data)
-  */
-  
-  getProfileData() {
-    window.IN.API.Raw("/people/~")
-      .result(this.onSuccess)
-      .error(this.onError)
-  }
-
-  onSuccess(data) {
-    console.log(data)
-  }
-
-  onError(error) {
-    console.log(error)
-  }
-
-  onLinkedInLoad() {
-    // e.preventDefault();
-    //console.log("hit the linkedin button");
-
-    window.IN.Event.on(window.IN, "auth", this.getProfileData);
-  }
-
-  componentDidMount() {
-    // this.onLinkedInLoad()
-  } 
-  /*
-    <script type="text/javascript">
-      // Setup an event listener to make an API call once auth is complete
-      function onLinkedInLoad() {
-        window.IN.Event.on(window.IN, "auth", this.getProfileData);
-      }
-      // Handle the successful return from the API call
-      function onSuccess(data) {
-        console.log(data);
-      }
-      // Handle an error response from the API call
-      function onError(error) {
-        console.log(error);
-      }
-      // Use the API call wrapper to request the member's basic profile data
-      function getProfileData() {
-        IN.API.Raw("/people/~").result(onSuccess).error(onError);
-      }
-    </script>
-    */
     render() {
       return (
         <div>
-          <script type="IN/Login"></script>
-          <script>
+          <script type="IN/Login">
+            <script>
               function onLinkedInLoad() {
-                window.IN.Event.on(window.IN, "auth", this.getProfileData)
-              }
-              function onSuccess(this.data) {
-                console.log(this.data)
-              }
-              function onError(this.error) {
-                console.log("hitting the script!" + this.error)
-              }
-              function getProfileData() {
-                window.IN.API.Raw("/people/~").result(this.onSuccess).error(this.onError)
+                window.IN.Event.on(window.IN, "auth", () => {
+                    window.IN.API.Raw("/people/~")
+                        .result(data => {
+                            console.log(data)
+                        })
+                        .error(error => {
+                            console.log(error)
+                        })
+                })
               }
             </script>
+          </script>
         </div>
       )
     }
