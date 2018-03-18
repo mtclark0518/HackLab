@@ -1,12 +1,12 @@
 {
   "name": "gaac",
   "version": "1.0.0",
-  "description": "General Assembly Alumni Connect",
+  "description": "General Assembly Social Network",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "drive": "concurrently \"cd back-end && npm start\" \"cd front-end && npm start\"",
+    "start": "npm start",
+    "dev": "concurrently \"nodemon\" \"cd front-end && npm start\"",
     "heroku-postbuild": "cd front-end && npm install --only=dev && npm install && npm run build"
   },
   "repository": {

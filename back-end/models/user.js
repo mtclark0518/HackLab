@@ -6,12 +6,6 @@ module.exports = (sequelize, Sequelize) => {
             autoIncrement: true,
             allowNull: false
         },
-        // reference to account
-        accountId: {
-            type: Sequelize.STRING,
-            allowNull: false,
-            unique: true
-        },
         headline: {
             type: Sequelize.STRING
         },
@@ -20,6 +14,21 @@ module.exports = (sequelize, Sequelize) => {
         },
         lastName: {
             type: Sequelize.STRING
+        },
+        industry: {
+            type: Sequelize.STRING
+        },
+        pictureUrl: {
+            type: Sequelize.STRING
+        },
+        summary: {
+            type: Sequelize.TEXT
+        },
+        gaCohort: {
+            type: Sequelize.STRING
+        },
+        interestCategories: {
+            type: Sequelize.ARRAY(Sequelize.STRING)
         }
     });
     return model
