@@ -8,8 +8,6 @@ class LoginButton extends Component {
   }
 
   createProfile(data) {
-
-    console.log(data)
     requestAPI("profile/create", "POST", data)
       .then(res => {
         console.log(res);
@@ -23,7 +21,7 @@ class LoginButton extends Component {
             <script>
               function onLinkedInLoad() {
                 window.IN.Event.on(window.IN, "auth", () => {
-                    window.IN.API.Raw("/people/~:(id,first-name,last-name,headline,industry,location,summary,picture-url::(original),public-profile-url)?format=json")
+                    window.IN.API.Raw("/people/~:(id,first-name,last-name,headline,industry,location,summary,picture-url::(original),public-profile-url)")
                         .result(data => {
                             this.createProfile(data);
                         })
