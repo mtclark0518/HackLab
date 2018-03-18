@@ -3,14 +3,22 @@ module.exports = (sequelize, Sequelize) => {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
-            autoIncrement: true
+            autoIncrement: true,
+            allowNull: false
         },
-        linkedinId: {
+        // reference to account
+        accountId: {
             type: Sequelize.STRING,
-            
-
+            allowNull: false,
+            unique: true
         },
-        block: {
+        headline: {
+            type: Sequelize.STRING
+        },
+        firstName: {
+            type: Sequelize.STRING
+        },
+        lastName: {
             type: Sequelize.STRING
         }
     });
