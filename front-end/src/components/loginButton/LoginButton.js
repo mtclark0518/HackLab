@@ -4,8 +4,7 @@ import requestAPI from '../../api';
 class LoginButton extends Component {
   constructor(props){
     super(props)
-    // this.createProfile = this.createProfile.bind(this)
-    this.onLinkedInLoad = this.onLinkedInLoad.bind(this)
+    this.createProfile = this.createProfile.bind(this)
   }
 
   createProfile(data) {
@@ -16,7 +15,7 @@ class LoginButton extends Component {
         console.log(res);
       })
   }
-
+  
     render() {
       return (
         <div>
