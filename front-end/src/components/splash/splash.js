@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import './splash.css';
 
-class splash extends Component {
+class Splash extends Component {
   render() {
-    return <div />;
+    return (
+    <div />)
   }
 }
 
-export default splash;
+export default Splash;
