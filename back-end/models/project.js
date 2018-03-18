@@ -5,12 +5,8 @@ module.exports = (sequelize, Sequelize) => {
             primaryKey: true,
             autoIncrement: true
         },
-        owner: {
-            type: Sequelize.INTEGER,
-            allowNull: false
-        },
-        members: {
-            type: Sequelize.ARRAY(Sequelize.INTEGER),
+        name: {
+            type: Sequelize.STRING,
         }
     });
     return model

@@ -1,10 +1,6 @@
-/*
- *  Setup the db (init the tables to default/empty )
- */
-var Sequelize = require('sequelize');
-var db = require('../models');
-
-db.sequelize.sync( { force: true } )
+// This file can be run to reset the database tables
+var db = require('../models/index');
+db.sequelize.sync({ force: true })
     .then( () => {
         process.exit();
     });
