@@ -16,6 +16,7 @@ class LoginButton extends Component {
         console.log(res);
       })
   }
+
   /*
     const data =  {
       firstName: "Courtney",
@@ -25,6 +26,7 @@ class LoginButton extends Component {
     };
     this.createProfile(data)
   */
+  
   getProfileData() {
     window.IN.API.Raw("/people/~")
       .result(this.onSuccess)
@@ -68,22 +70,12 @@ class LoginButton extends Component {
         IN.API.Raw("/people/~").result(onSuccess).error(onError);
       }
     </script>
-  */
-  /*
-    
-  */
-
-  render() {
-    return (
-    <div>
-        <script src="//platform.linkedin.com/in.js">
-                api_key: 86gb2jnfy6g3ek
-                onLoad: onLinkedInLoad
-            </script>
+    */
+    render() {
+      return (
         <script type="IN/Login"></script>
-    </div>
-    )
-  }
+      )
+    }
 }
 
 export default LoginButton;
