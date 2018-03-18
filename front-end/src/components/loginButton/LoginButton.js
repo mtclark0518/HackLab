@@ -8,14 +8,12 @@ class LoginButton extends Component {
   }
 
   createProfile(data) {
-    //how to get the data from the LinkedIn to return
-    
     requestAPI("profile/create", "POST", data)
       .then(res => {
         console.log(res);
       })
   }
-  
+
     render() {
       return (
         <div>
@@ -25,7 +23,7 @@ class LoginButton extends Component {
                 window.IN.Event.on(window.IN, "auth", () => {
                     window.IN.API.Raw("/people/~")
                         .result(data => {
-                            console.log(data)
+                            this.createProfile(data);
                         })
                         .error(error => {
                             console.log(error)
