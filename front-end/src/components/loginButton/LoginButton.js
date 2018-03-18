@@ -4,7 +4,8 @@ import requestAPI from '../../api';
 class LoginButton extends Component {
   constructor(props){
     super(props)
-    this.createProfile = this.createProfile.bind(this)
+    // this.createProfile = this.createProfile.bind(this)
+    this.onLinkedInLoad = this.onLinkedInLoad.bind(this)
   }
 
   createProfile(data) {
@@ -15,8 +16,7 @@ class LoginButton extends Component {
         console.log(res);
       })
   }
-
-  componentWillMount() {
+  /*
     const data =  {
       firstName: "Courtney",
       lastName: "Fay",
@@ -24,7 +24,44 @@ class LoginButton extends Component {
       linkedInId: "THI5I54T3ST"
     };
     this.createProfile(data)
+  */
+  getProfileData() {
+    IN.API.Raw("/people/~").result(onSuccess).error(onError)
+  }
+
+  onLinkedInLoad() {
+    IN.Event.on(IN, "auth", this.getProfileData)
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  }
+
+  componentWillMount() {
+    this.onLinkedInLoad()
   } 
+  /*
+    <script type="text/javascript">
+      // Setup an event listener to make an API call once auth is complete
+      function onLinkedInLoad() {
+        IN.Event.on(IN, "auth", getProfileData);
+      }
+      // Handle the successful return from the API call
+      function onSuccess(data) {
+        console.log(data);
+      }
+      // Handle an error response from the API call
+      function onError(error) {
+        console.log(error);
+      }
+      // Use the API call wrapper to request the member's basic profile data
+      function getProfileData() {
+        IN.API.Raw("/people/~").result(onSuccess).error(onError);
+      }
+    </script>
+  */
 
   render() {
     return (

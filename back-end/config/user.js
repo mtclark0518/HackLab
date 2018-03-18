@@ -1,5 +1,6 @@
 const user = (req, res) => {
-	console.log(req.body);
+	const result = req.body
+	return result
 }
 
 module.exports = user
