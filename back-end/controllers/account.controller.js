@@ -5,7 +5,7 @@ const User = db.User;
 
 
 
-createNew(req,res) {
+createNew = (req,res) => {
     console.log(req.body);
 }
 
