@@ -55,7 +55,7 @@ class LoginButton extends Component {
     <script type="text/javascript">
       // Setup an event listener to make an API call once auth is complete
       function onLinkedInLoad() {
-        
+        window.IN.Event.on(window.IN, "auth", this.getProfileData);
       }
       // Handle the successful return from the API call
       function onSuccess(data) {
@@ -73,7 +73,23 @@ class LoginButton extends Component {
     */
     render() {
       return (
-        <script type="IN/Login"></script>
+        <div>
+          <script type="IN/Login"></script>
+          <script>
+              function onLinkedInLoad() {
+                window.IN.Event.on(window.IN, "auth", this.getProfileData)
+              }
+              function onSuccess(this.data) {
+                console.log(this.data)
+              }
+              function onError(this.error) {
+                console.log("hitting the script!" + this.error)
+              }
+              function getProfileData() {
+                window.IN.API.Raw("/people/~").result(this.onSuccess).error(this.onError)
+              }
+            </script>
+        </div>
       )
     }
 }
