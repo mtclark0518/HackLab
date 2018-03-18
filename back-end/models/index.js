@@ -1,21 +1,19 @@
 const Sequelize = require('sequelize')
 const sequelize = new Sequelize(process.env.DATABASE_URL || 'postgres://t@localhost:5432/gaac');
 
+const Account = sequelize.import('./account');
+const User = sequelize.import('./user');
+const Project = sequelize.import('./project');
 
+Account.hasOne(User);
+User.belongsTo(Accout);
 
-const User = sequelize.import('./profile');
-const Profile = sequelize.import('./profile');
-const Project = sequelize.import('./profile');
+Project.belongsTo(User, {as: 'owner'});
+User.hasMany(Project);
 
+Project.hasMany(User, {as: 'members'});
+User.belongsToMany(Project)
 
-User.hasOne(Profile);
-Profile.belongsTo(User);
-
-
-
-const db = {};
-db.User = User;
-db.Profile = Profile;
-db.Project = Project;
+const db = {User,Profile,Project};
 
 module.exports = db;
