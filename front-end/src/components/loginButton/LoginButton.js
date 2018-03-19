@@ -1,29 +1,21 @@
 import React, {Component} from 'react';
-import requestAPI from '../../api';
 
 class LoginButton extends Component {
-  constructor(props){
-    super(props)
-    this.createProfile = this.createProfile.bind(this)
-  }
 
-  createProfile(data) {
-    requestAPI("profile/create", "POST", data)
-      .then(res => {
-        console.log(res);
-      })
-  }
+	// after a sucesseful linkedInLogin
+	onLinkedIn(data){
+		this.props.loginOrCreate(data)
+	}
 
     render() {
       return (
-        <div>
           <script type="IN/Login">
             <script>
               function onLinkedInLoad() {
                 window.IN.Event.on(window.IN, "auth", () => {
                     window.IN.API.Raw("/people/~:(id,first-name,last-name,headline,industry,location,summary,picture-url::(original),public-profile-url)")
                         .result(data => {
-                            this.createProfile(data);
+                            this.onLinkedIn(data);
                         })
                         .error(error => {
                             console.log(error)
@@ -32,7 +24,6 @@ class LoginButton extends Component {
               }
             </script>
           </script>
-        </div>
       )
     }
 }

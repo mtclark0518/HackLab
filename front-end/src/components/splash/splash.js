@@ -4,7 +4,9 @@ import './splash.css';
 class Splash extends Component {
   render() {
     return (
-    <div />)
+    <div>
+      splash
+    </div>)
   }
 }
 

@@ -4,7 +4,7 @@ const   router = require('express').Router(),
 
 
 
-// creates a new user profile
-router.post('/api/profile/create', Accounts.Login);
+// request a user profile
+router.post('/api/profile', Accounts.Login);
 
 module.exports = router;
