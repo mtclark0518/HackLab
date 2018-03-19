@@ -3,8 +3,12 @@ import './profile.css';
 
 class profile extends Component {
   render() {
-    return <div />;
-  }
+    return (
+    
+    <div>
+      profile
+    </div>
+  )}
 }
 
 export default profile;
