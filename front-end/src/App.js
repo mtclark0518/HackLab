@@ -5,13 +5,15 @@ import LoginButton from './components/loginButton/LoginButton';
 import Splash from './components/splash/splash';
 import Profile from './components/profile/profile';
 import requestAPI from './services/api';
-
+import JWT from './services/jwt';
 class App extends Component {
   constructor(props){
     super(props)
+    this.token = new JWT();
     this.state = {
       authorized: null,
-      account: {}
+      account: {},
+
     };
   }
   // method called after successfull linkedin authentication 
@@ -30,6 +32,7 @@ class App extends Component {
 
   // confirms authorized user and updates state to display profile component
   handleAccount(){
+    console.log(this.token.getProfile());
     if(window.IN.User.isAuthorized()){
       this.setState({
         authorized: true
@@ -42,6 +45,7 @@ class App extends Component {
   }
 
   render() {
+    
     return (
       <div className="App">
           <img src={logo} className="App-logo" alt="logo" />
