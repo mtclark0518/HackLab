@@ -4,46 +4,41 @@ import './App.css';
 import LoginButton from './components/loginButton/LoginButton';
 import Splash from './components/splash/splash';
 import Profile from './components/profile/profile';
-import requestAPI from './api';
+import requestAPI from './services/api';
 
 class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      account: null
+      authorized: null,
+      account: {}
     };
   }
-
-  // called when the component...in this case the app...loads
-  componentDidMount(){
-    this.checkForAccount();
-  }
-  
-  // checks local storage to see if we already have an account set
-  checkForAccount(){
-    const found = window.localStorage.getItem('account');
-    console.log(found);
-    if(found){
-      this.setState({
-        account: found
-      });
-    }
-  }
-
   // method called after successfull linkedin authentication 
   loginOrCreate(data){
-      // sets account in storage for future login
-      window.localStorage.setItem('account', data.id)
       // sends a request for a user profile
       // if first login this will create an initial profile 
       requestAPI("profile", "POST", data)
         .then(res => {
-          // logs the user details
-          console.log(res);
-          
-          // updates state after receiving profile details to render profile
-          this.checkForAccount();
+          // sets account to app state and passes to profile as a prop 'profile'
+          this.setState({
+            account: res
+          })
+          this.handleAccount();
         });
+  }
+
+  // confirms authorized user and updates state to display profile component
+  handleAccount(){
+    if(window.IN.User.isAuthorized()){
+      this.setState({
+        authorized: true
+      })
+    } else {
+      this.setState({
+        authorized: false
+      })
+    }
   }
 
   render() {
@@ -52,8 +47,8 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Como se Taco Fart?</h1>
         
-        {/* if there isn't a user already saved show this */}
-        {!this.state.account && (
+        {/* if there isn't a user already show this */}
+        {!this.state.authorized && (
           <div>
             {/* passes the loginOrCreate method to the LoginButton */}
             <LoginButton loginOrCreate={this.loginOrCreate.bind(this)}/>
@@ -62,8 +57,8 @@ class App extends Component {
         )}  
 
         {/* if an account is already saved in storage show this */}        
-        {this.state.account && (
-          <Profile />
+        {this.state.authorized && (
+          <Profile profile={this.state.account}/>
         )}
       </div>
     );
