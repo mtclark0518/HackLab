@@ -37,20 +37,18 @@ const createJWToken = (details) => {
     }, {});
 
     let token = jwt.sign({
-            details: details.sessionData
-        }, 
-        process.env.JWT_SECRET,
-        {
-            header: header,
-            issuer: process.env.JWT_ISSUER,         
-            expiresIn: details.maxAge,
-        }
-    )
+        details: details.sessionData
+    }, 
+    process.env.JWT_SECRET, {
+        header: header,
+        issuer: process.env.JWT_ISSUER,         
+        expiresIn: details.maxAge,
+    });
     console.log(token);
     return token
 }
 
-const handleJWT = (req, res, next) => {
+const checkJWT = (req, res, next) => {
     let token = (req.method === 'POST') ? req.body.token : req.query.token;
 
     verifyJWTToken(token)
@@ -63,4 +61,4 @@ const handleJWT = (req, res, next) => {
         })
 }
 
-export default {verifyJWTToken, createJWToken, handleJWT}
+export default {verifyJWTToken, createJWToken, checkJWT}

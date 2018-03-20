@@ -4,6 +4,6 @@ const   router = require('express').Router(),
 
 
 // request a user profile
-router.post('/api/profile', Accounts.Login);
+router.post('/api/profile', Accounts.AccessRequest);
 
 module.exports = router;

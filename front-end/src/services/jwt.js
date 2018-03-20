@@ -3,6 +3,7 @@ import * as decode from 'jwt-decode';
 
 export default class jwt {
 
+
     loggedIn(){
         const token = this.getToken();
         console.log(token);
@@ -33,29 +34,21 @@ export default class jwt {
     }
 
     getProfile() {
-        return 'test'
         // Using jwt-decode npm package to decode the token
-        // return decode(this.getToken());
+        return decode(this.getToken());
     }
 }
 
 
-
-//   // Setting up basic headers
-//   public basic = {
-//     headers: new HttpHeaders({
-//       'Accept': 'application/json',
-//       'Content-Type': 'application/json',
-//     })
-//   };
-
-//   // Setting Authorization header
-//   // Authorization: Bearer xxxxxxx.xxxxxxxx.xxxxxx
-//   private AuthBearer = `Bearer ${this.getToken()}`;
-//   public authHeaders =  {
-//     headers: new HttpHeaders({
-//       'Accept': 'application/json',
-//       'Content-Type': 'application/json',
-//       'Authorization': this.AuthBearer
-//     })
-//   };
+const headers = {
+    basic : {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+    },
+    // AuthBearer : `Bearer ${this.jwt.getToken()}`,
+    auth : {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': this.AuthBearer
+    }
+};
