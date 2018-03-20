@@ -32,6 +32,7 @@ class App extends Component {
 
   // confirms authorized user and updates state to display profile component
   handleAccount(){
+    console.log(window.IN)
     console.log(this.token.getProfile());
     if(window.IN.User.isAuthorized()){
       this.setState({

@@ -11,13 +11,16 @@ module.exports = (sequelize, Sequelize) => {
             unique: true
         },
     });
-// TODO
-    // model.prototype.hash = function(password) {
-    //     return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
-    // };
-    // model.prototype.validPassword = function(attempted, encrypted) {
-    //     return bcrypt.compareSync(attempted, encrypted);
-    // };
+
+    // hashes linkedInId value on account creation
+    model.prototype.hash = function(account) {
+        return bcrypt.hashSync(account, bcrypt.genSaltSync(8));
+    };
+
+    // adds method to account to check 
+    model.prototype.validUser = function(attempted, encrypted) {
+        return bcrypt.compareSync(attempted, encrypted);
+    };
 
     return model
 }

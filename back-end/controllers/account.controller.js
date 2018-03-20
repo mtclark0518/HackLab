@@ -1,7 +1,23 @@
 const db = require('../models/index');
 const Account = db.Account;
 const User = db.User;
+const auth = require('../middleware/auth');
 
+
+const Locate = (user) => {
+    Account.findOne({
+        where: {
+            linkedInId: user
+        }
+    }).then(account => {
+        if (!account){
+            return false;
+        }
+    });
+};
+const Register = (req, res) => {
+    console.log(req)
+}
 // Recieves an authenticated linkedin profile id 
 // find user profile for linkedin account and return ||
 // registers new user and returns user profile

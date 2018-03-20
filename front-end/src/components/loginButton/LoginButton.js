@@ -13,6 +13,7 @@ class LoginButton extends Component {
 
     // after a sucesseful linkedInLogin
 	onLinkedIn(data){
+        console.log(data)
         this.props.loginOrCreate(data)
     }
 
@@ -22,7 +23,7 @@ class LoginButton extends Component {
 
     // requests profile information from linkedIn
     getProfileData(){
-        window.IN.API.Raw("/people/~:(id,first-name,last-name,headline,industry,location,summary,picture-url::(original),public-profile-url)")
+        window.IN.API.Raw("/people/~:(id,first-name,last-name,email-address,headline,industry,location,summary,picture-url::(original),public-profile-url)")
         .result( data => {this.onLinkedIn(data); })
         .error(this.onError);
     }
