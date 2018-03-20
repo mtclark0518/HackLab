@@ -63,8 +63,4 @@ const handleJWT = (req, res, next) => {
         })
 }
 
-
-createJWToken({test:'test'});
-
-
-// export default {verifyJWTToken, createJWToken, handleJWT}
+export default {verifyJWTToken, createJWToken, handleJWT}
