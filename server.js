@@ -1,19 +1,28 @@
 const express = require('express'), app = express();
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const helmet = require('helmet');
 const path = require('path')
 const routes = require('./back-end/config/routes');
 const {Client} = require('pg')
-const PORT = process.env.PORT || 8080
+require('dotenv').config();
+
+const PORT = process.env.PORT;
 
 // const client = new Client({ connectionString: process.env.DATABASE_URL });
 // client.connect( (error) => {
 // 	if (error) { console.log('error yo: ', error) } else { console.log('connected to db') }
 // });
 
-//body-parser functionality
+
+// helmet middleware for security
+app.use(helmet());
+app.use(cookieParser())
+// body-parser functionality
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : false }));
 app.use(express.static(path.join(__dirname +  '/front-end/build')));
+
 app.use('/', routes);
 
 app.get('*', (req, res) => {
