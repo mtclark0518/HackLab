@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class LoginButton extends Component {
+class LinkedInButton extends Component {
 
     componentDidMount(){
         this.onLinkedInLoad();
@@ -35,4 +35,4 @@ class LoginButton extends Component {
     }
 }
 
-export default LoginButton;
+export default LinkedInButton;
