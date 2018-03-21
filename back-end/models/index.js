@@ -1,6 +1,7 @@
+require('dotenv').config();
 const Sequelize = require('sequelize')
-const sequelize = new Sequelize(process.env.DATABASE_URL || 'postgres://t@localhost:5432/gaac', {
-    dialect: 'postgres',
+const sequelize = new Sequelize(process.env.DATABASE_URL || process.env.DEV_DATABASE_URL, {
+    dialect: process.env.DATABASE_DIALECT,
     operatorsAliases : false
 });
 const Account = sequelize.import('./account');
