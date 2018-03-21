@@ -1,11 +1,9 @@
 const jwt = require('jsonwebtoken');
+const ms = require('ms');
 require('dotenv').config();
 
-const header = {
-    "typ":"JWT",
-    "alg":"HS256"
-}
 
+// called by the middleware function when user makes a request to the api
 const verifyJWTToken = (token) => 
 {
     return new Promise((resolve, reject) => 
@@ -14,10 +12,10 @@ const verifyJWTToken = (token) =>
         {
             if (err || !decodedToken)
             {
-                console.log('error verifying jwt')
+                console.log('nooope, unsuccessful jwt verification');
                 return reject(err);
             }
-            console.log('inside of jwt verify callback')
+            console.log('aight you good this time')
             resolve(decodedToken);
         });
     });
@@ -30,8 +28,15 @@ const createJWToken = (details) =>
     {
         details = {}
     }
-    let token = jwt.sign(
+    // sets header as per docs
+    const header = 
     {
+        "typ":"JWT",
+        "alg":"HS256"
+    }
+    // signing method
+    const token = jwt.sign
+    ({
         details: 
         {
             id: details.AccountId,
@@ -42,27 +47,29 @@ const createJWToken = (details) =>
     {
         header: header,
         issuer: process.env.JWT_ISSUER,         
-        expiresIn: 60000,
+        expiresIn: ms('30 days'),
     });
-    console.log(token);
+    return token;
+};
 
-    return token
-}
-
+// middleware function triggered by user request to api 
 const checkJWT = (req, res, next) => 
 {
     console.log('who\'s trying to see at my data???');
+    // the token is stored in authorization headers
     if( req.headers && req.headers.authorization)
     {
+        // split the string into a two item array 
         const token = req.headers.authorization.split(' ');
+        // first item is the jwt type
         if (token[0] == 'JWT')
         {
+            // second item is the actual token
             verifyJWTToken(token[1])
             .then( decodedToken =>
             {
-                console.log(decodedToken)
+                // saving the decoded information to the request and passing it on
                 req.user = decodedToken.details;
-                console.log(req.user)
                 next();
             })
             .catch( err => 
@@ -73,6 +80,7 @@ const checkJWT = (req, res, next) =>
     }
     else
     {
+        // should only get here if we don't even have a header in the request
         res.status(400).json( { message: "No authorization header provided"} );
     }
 };

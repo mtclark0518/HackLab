@@ -1,7 +1,7 @@
 const db = require('../models/index');
 const Account = db.Account;
 const User = db.User;
-const auth = require('../middleware/auth');
+const Auth = require('../middleware/auth');
 
 
 // Recieves an authenticated linkedin profile id 
@@ -17,11 +17,10 @@ const AccessRequest = (req, res) => {
         })
         .then( user => {
             if (!user){
-                console.log('error finding profile');
                 res.error('couldnt locate a profile');
             } else if (user) {
                 console.log('user profile found. lets make an auth token');
-                generateToken(user);
+                GenerateToken(user);
             }
         });
     };
@@ -36,7 +35,8 @@ const AccessRequest = (req, res) => {
             }
             if ( account ) {
                 // create a user profile for the account
-                CreateProfile(account[0].dataValues.id);
+                console.log('registered account, passing to create profile')
+                CreateProfile(account.dataValues.id);
             }
         });
     };
@@ -50,26 +50,29 @@ const AccessRequest = (req, res) => {
                 industry: req.body.industry,
                 pictureUrl: req.body.pictureUrl,
                 summary: req.body.summary
-        }).then( user => {
-            if(!user){res.error("error creating user profile")}
-            else if(user){
+        })
+        .then( user => {
+            if(!user){ res.error("error creating user profile"); }
+            else if (user) {
                 console.log('user profile has been created, lets set up an auth token');
-                generateToken(user);
+                GenerateToken(user);
             }
         });
     };
+
     // creates an access token and sends this back to the client
-    const generateToken = (user) => {
+    const GenerateToken = user => {
         console.log('lets make a token');
-        let token = auth.createJWToken( user.dataValues );
-        console.log(token)
-        let data = {
+        const token = Auth.createJWToken( user.dataValues );
+        const data = {
             token: token
         }
+        // Whether registering or logging in the success response comes from here
         res.json(data);
     };
-
+    
     // This is the initialization of the request process
+    // <<<----------------------------------------------------------------->>> //
     Account.findOne({
         where: {
             linkedInId: req.body.id
@@ -81,15 +84,15 @@ const AccessRequest = (req, res) => {
             Register();
         }
         else if (account) {
-            console.log('found an accounts');
+            console.log('account found. passing to login');
             const acc = account.dataValues;
             Login(acc);
         }
     });
+    // <<<----------------------------------------------------------------->>> //
 };
-
 module.exports = {
     AccessRequest
-}
+};
 
 
