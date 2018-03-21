@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import LoginButton from './components/loginButton/LoginButton';
+import LinkedInButton from './components/loginButton/LinkedInButton';
 import Splash from './components/splash/splash';
 import Profile from './components/profile/profile';
 import requestAPI from './services/api';
@@ -61,7 +61,7 @@ class App extends Component {
         {!this.state.authorized && (
           <div>
             {/* passes the loginOrCreate method to the LoginButton */}
-            <LoginButton loginOrCreate={this.loginOrCreate.bind(this)}/>
+            <LinkedInButton loginOrCreate={this.loginOrCreate.bind(this)}/>
             <Splash />
           </div>
         )}  
