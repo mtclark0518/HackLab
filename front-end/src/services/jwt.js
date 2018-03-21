@@ -35,16 +35,3 @@ class jwt {
     }
 }
 export default jwt;
-
-// const headers = {
-//     basic : {
-//         'Accept': 'application/json',
-//         'Content-Type': 'application/json',
-//     },
-//     AuthBearer : `Bearer ${getToken()}`,
-//     auth : {
-//         'Accept': 'application/json',
-//         'Content-Type': 'application/json',
-//         'Authorization': this.AuthBearer
-//     }
-// };

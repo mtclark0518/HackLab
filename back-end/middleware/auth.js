@@ -15,7 +15,6 @@ const verifyJWTToken = (token) =>
             if (err || !decodedToken)
             {
                 console.log('error verifying jwt')
-                console.log(err)
                 return reject(err);
             }
             console.log('inside of jwt verify callback')
@@ -61,7 +60,9 @@ const checkJWT = (req, res, next) =>
             verifyJWTToken(token[1])
             .then( decodedToken =>
             {
-                req.user = decodedToken.data;
+                console.log(decodedToken)
+                req.user = decodedToken.details;
+                console.log(req.user)
                 next();
             })
             .catch( err => 

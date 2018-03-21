@@ -3,35 +3,38 @@ import './profile.css';
 import requestAPI from '../../services/api';
 
 class profile extends Component {
-
   
   constructor(props){
     super(props)
     this.state = {
-      test: null
+      user: {}
     }
   }
 
-
-  componentDidMount(){
+  componentDidMount() {
     this.loadProfile();
   }
 
   loadProfile(){
-    console.log('hiiii')
     requestAPI("api", "profile", "GET")
       .then(response => {
         console.log(response)
-      })
+        this.setState({user: response});
+      });
   }
 
-
   render() {
+    const quickNsimple = {
+      width: "150px", 
+      border:"1px solid black", 
+      boxShadow:"0 0 10px 2px black", 
+      borderRadius:"12%"
+    }
     return (
-    
-    <div>
-      profile
-    </div>
+      <div>
+        <img style={quickNsimple} src={this.state.user.pictureUrl}/>
+        <h2>Hi {this.state.user.firstName}</h2>
+      </div>
   )}
 }
 

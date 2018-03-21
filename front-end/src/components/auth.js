@@ -1,3 +1,7 @@
+// TODO REWORK THIS INTO A DIFFERENT COMPONENT SO THAT ALL THE AUTH STUFF
+// ISN'T SITTING IN THE APP COMPONENT
+
+
 // import React, { Component } from 'react';
 // import LoginButton from './components/loginButton/LoginButton';
 // import requestAPI from '../services/api';
