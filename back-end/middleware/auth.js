@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-const _ = require('lodash');
 require('dotenv').config();
 
 const header = {
@@ -7,58 +6,74 @@ const header = {
     "alg":"HS256"
 }
 
-const verifyJWTToken = (token) => {
-    return new Promise((resolve, reject) => {
-        jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
-        if (err || !decodedToken) {
-            return reject(err);
-        }
-        resolve(decodedToken);
+const verifyJWTToken = (token) => 
+{
+    return new Promise((resolve, reject) => 
+    {
+        jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => 
+        {
+            if (err || !decodedToken)
+            {
+                console.log('error verifying jwt')
+                console.log(err)
+                return reject(err);
+            }
+            console.log('inside of jwt verify callback')
+            resolve(decodedToken);
         });
     });
 };
 
-const createJWToken = (details) => {
+const createJWToken = (details) => 
+{
     // formats the argument into an object
-    if (typeof details !== 'object') {
+    if (typeof details !== 'object') 
+    {
         details = {}
     }
-    // if our token details don't have a number value set that here
-    // setting it for just 5 min right now for testing
-    if (!details.maxAge || typeof details.maxAge !== 'number') {
-        details.maxAge = 300
-    }
-
-    details.sessionData = _.reduce(details.sessionData || {}, (memo, val, key) => {
-        if (typeof val !== "function" && key !== "password") {
-        memo[key] = val
+    let token = jwt.sign(
+    {
+        details: 
+        {
+            id: details.AccountId,
+            name: `${details.firstName} ${details.lastName}`
         }
-        return memo
-    }, {});
-
-    let token = jwt.sign({
-        details: details.sessionData
     }, 
-    process.env.JWT_SECRET, {
+    process.env.JWT_SECRET, 
+    {
         header: header,
         issuer: process.env.JWT_ISSUER,         
-        expiresIn: details.maxAge,
+        expiresIn: 60000,
     });
     console.log(token);
+
     return token
 }
 
-const checkJWT = (req, res, next) => {
-    let token = (req.method === 'POST') ? req.body.token : req.query.token;
+const checkJWT = (req, res, next) => 
+{
+    console.log('who\'s trying to see at my data???');
+    if( req.headers && req.headers.authorization)
+    {
+        const token = req.headers.authorization.split(' ');
+        if (token[0] == 'JWT')
+        {
+            verifyJWTToken(token[1])
+            .then( decodedToken =>
+            {
+                req.user = decodedToken.data;
+                next();
+            })
+            .catch( err => 
+            {
+                res.status(400).json( { message: "Invalid auth token provided." } );
+            });
+        }
+    }
+    else
+    {
+        res.status(400).json( { message: "No authorization header provided"} );
+    }
+};
 
-    verifyJWTToken(token)
-        .then((decodedToken) => {
-            req.user = decodedToken.data;
-            next()
-        })
-        .catch((err) => {
-            res.status(400).json( { message: "Invalid auth token provided." } );
-        })
-}
-
-export default {verifyJWTToken, createJWToken, checkJWT}
+module.exports = {verifyJWTToken, createJWToken, checkJWT}

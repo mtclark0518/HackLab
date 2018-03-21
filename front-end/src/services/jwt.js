@@ -1,54 +1,50 @@
 import * as decode from 'jwt-decode';
 
 
-export default class jwt {
+class jwt {
 
-
-    loggedIn(){
+    static loggedIn(){
         const token = this.getToken();
-        console.log(token);
         return !!token && !this.isTokenExpired(token);
     }
 
-    isTokenExpired(token) {
+    static isTokenExpired(token) {
         const decoded = decode(token);
-        if (decoded.exp < Date.now() / 1000) {
-            return true;
-        }
-        return false;
+        let isExpired = decoded.exp < (Date.now() / 1000) ?  true : false;
+        return isExpired;
     }
 
-    setToken(token) {
+    static setToken(token) {
         // Saves user token to localStorage
         window.localStorage.setItem('token', token);
     }
 
-    getToken() {
+    static getToken() {
         // Retrieves the user token from localStorage
         return window.localStorage.getItem('token');
     }
 
-    clearToken() {
+    static clearToken() {
         // Clear user token and profile data from localStorage
         window.localStorage.removeItem('token');
     }
 
-    getProfile() {
+    static getProfile() {
         // Using jwt-decode npm package to decode the token
         return decode(this.getToken());
     }
 }
+export default jwt;
 
-
-const headers = {
-    basic : {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-    },
-    // AuthBearer : `Bearer ${this.jwt.getToken()}`,
-    auth : {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': this.AuthBearer
-    }
-};
+// const headers = {
+//     basic : {
+//         'Accept': 'application/json',
+//         'Content-Type': 'application/json',
+//     },
+//     AuthBearer : `Bearer ${getToken()}`,
+//     auth : {
+//         'Accept': 'application/json',
+//         'Content-Type': 'application/json',
+//         'Authorization': this.AuthBearer
+//     }
+// };

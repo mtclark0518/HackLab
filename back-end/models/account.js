@@ -12,15 +12,5 @@ module.exports = (sequelize, Sequelize) => {
         },
     });
 
-    // hashes linkedInId value on account creation
-    model.prototype.hash = function(account) {
-        return bcrypt.hashSync(account, bcrypt.genSaltSync(8));
-    };
-
-    // adds method to account to check 
-    model.prototype.validUser = function(attempted, encrypted) {
-        return bcrypt.compareSync(attempted, encrypted);
-    };
-
     return model
 }

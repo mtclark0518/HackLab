@@ -9,42 +9,47 @@ import JWT from './services/jwt';
 class App extends Component {
   constructor(props){
     super(props)
-    this.token = new JWT();
+    this.auth = new JWT();
     this.state = {
       authorized: null,
-      account: {},
-
     };
   }
+
+
+
+
   // method called after successfull linkedin authentication 
   loginOrCreate(data){
-      // sends a request for a user profile
-      // if first login this will create an initial profile 
-      requestAPI("profile", "POST", data)
-        .then(res => {
-          // sets account to app state and passes to profile as a prop 'profile'
-          this.setState({
-            account: res
-          })
-          this.handleAccount();
-        });
-  }
-
-  // confirms authorized user and updates state to display profile component
-  handleAccount(){
-    console.log(window.IN)
-    console.log(this.token.getProfile());
-    if(window.IN.User.isAuthorized()){
+    console.log(data)
+    if(JWT.loggedIn()) {
       this.setState({
         authorized: true
-      })
+      });
+      return;
     } else {
-      this.setState({
-        authorized: false
-      })
+      // removes any expired token from storage
+      this.auth.clearToken();
+      // sends a request for an access token
+      requestAPI("access", "request", "POST", data)
+        .then( res => {
+          console.log(res)
+          // sets access token 
+          this.auth.setToken(res.token)
+          this.setState({
+            authorized: true
+          });
+        });
     }
   }
 
+
+
+
+  checkForUser(){
+    if(!this.auth.loggedIn()){ this.setState({authorized: false})}
+  }
+
+  
   render() {
     
     return (
@@ -61,9 +66,9 @@ class App extends Component {
           </div>
         )}  
 
-        {/* if an account is already saved in storage show this */}        
+        {/* if profile is already saved in storage show this */}        
         {this.state.authorized && (
-          <Profile profile={this.state.account}/>
+          <Profile/>
         )}
       </div>
     );
