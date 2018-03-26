@@ -8,10 +8,12 @@ Invision Prototype: https://projects.invisionapp.com/share/GKGE881NWJS
 ### Technologies Utilized
 ##### UX/UI/Design
 Sketch
+
 Invision
 
 ##### Front End
 HTML/CSS
+
 React
 
 ##### Back End
