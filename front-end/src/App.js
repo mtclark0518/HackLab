@@ -18,7 +18,6 @@ class App extends Component {
 
     // lifecycle method called on app load
     componentDidMount(){
-        console.log('test')
         JWT.loggedIn() ? 
             this.setState({ authorized: true }) : 
             this.setState( { authorized: false } );
