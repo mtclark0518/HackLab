@@ -5,6 +5,7 @@
   "dependencies": {
     "jwt-decode": "^2.2.0",
     "lodash-fp": "^0.10.4",
+    "npm": "^5.8.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-flex": "^2.2.8",
