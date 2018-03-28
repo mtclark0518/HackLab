@@ -6,6 +6,8 @@ import Splash from './components/splash/splash';
 import Profile from './components/profile/profile';
 import requestAPI from './services/api';
 import JWT from './services/jwt';
+
+
 class App extends Component {
     constructor(props) {
         super(props)
@@ -16,7 +18,7 @@ class App extends Component {
 
     // lifecycle method called on app load
     componentDidMount(){
-
+        console.log('test')
         JWT.loggedIn() ? 
             this.setState({ authorized: true }) : 
             this.setState( { authorized: false } );
