@@ -4,6 +4,7 @@ Hacklab is a lightweight, mobile-first web application that allows current and p
 
 ### Project Resources
 Trello: https://trello.com/gaalumhackathon
+
 Invision Prototype: https://projects.invisionapp.com/share/GKGE881NWJS
 ***
 
