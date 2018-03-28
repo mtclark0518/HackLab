@@ -24,7 +24,10 @@ module.exports = (sequelize, Sequelize) => {
         summary: {
             type: Sequelize.TEXT
         },
-        gaCohort: {
+        bootcampCohort: {
+            type: Sequelize.STRING
+        },
+        location: {
             type: Sequelize.STRING
         },
         interestCategories: {
