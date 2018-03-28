@@ -37,10 +37,16 @@ class Profile extends Component {
       boxShadow:"0 0 10px 2px black", 
       borderRadius:"12%"
     };
+    //need to add location
     return (
       <div>
         <img style={quickNsimple} src={this.state.user.pictureUrl} alt="linkedin profile"/>
-        <h2>Hi {this.state.user.firstName}</h2>
+        <h2>Hi {this.state.user.firstName} {this.state.user.lastName}</h2>
+        <p>Bio: {this.state.user.headline}</p>
+        <p>Industry: {this.state.user.industry}</p>
+        <p>Interest Categories: {this.state.user.interestCategories}</p>
+        <p>Bootcamp Cohort: {this.state.user.gaCohort}</p>
+        <p>Skills: {this.state.user.summary}</p>
       </div>
   )}
 }
