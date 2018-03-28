@@ -49,7 +49,8 @@ const AccessRequest = (req, res) => {
                 headline: req.body.headline,
                 industry: req.body.industry,
                 pictureUrl: req.body.pictureUrl,
-                summary: req.body.summary
+                summary: req.body.summary,
+                location: req.body.location.name
         })
         .then( user => {
             if(!user){ res.error("error creating user profile"); }
