@@ -9,5 +9,6 @@ router.post('/access/request', Access.AccessRequest);
 // at least for now all other routes go through the api controller
 // set router to verify authorization token on api controller requests
 router.get('/api/profile', Auth.checkJWT, Api.getProfile);
+router.put('/api/profile', Auth.checkJWT, Api.updateProfile);
 
 module.exports = router;

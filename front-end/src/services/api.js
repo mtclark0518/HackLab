@@ -8,15 +8,18 @@ export default function requestAPI(controller, route, method = 'GET', body) {
 		'Accept': 'application/json',
 		'Content-Type': 'application/json',
 	};
+	const jsonBody = JSON.stringify(body);
+
 	// checks if there is a user
 	if ( JWT.loggedIn() ) {
 		// if we have a valid token we set it as an authorization header
 		headers['Authorization'] = `JWT ${JWT.getToken()}`;
 	}
+
 	return fetch( url, {
 		method: method,
 		headers: headers,
-		body: JSON.stringify(body)
+		body: jsonBody
 	})
 	.then(response => 
 		response.json()
@@ -26,11 +29,11 @@ export default function requestAPI(controller, route, method = 'GET', body) {
 	)
 	.then( ({json, response}) => {
 		if (!response.ok) {
-			return Promise.reject(json)
+			return Promise.reject(json);
 		}
-		return json
+		return json;
 	})
 	.catch((error) => {
-		console.error(error)
+		console.error(error);
 	});
 }
