@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/lodash": "^4.14.106",
     "jwt-decode": "^2.2.0",
     "lodash-fp": "^0.10.4",
     "npm": "^5.8.0",
