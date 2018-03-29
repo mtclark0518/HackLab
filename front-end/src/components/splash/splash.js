@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import './splash.css';
+import LinkedInButton from './LinkedInButton';
 
 class Splash extends Component {
   render() {
     return (
     <div>
-      splash
-    </div>)
+      <LinkedInButton loginOrCreate={this.props.loginOrCreate}/>
+    </div>
+    )
   }
 }
 

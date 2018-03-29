@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import LinkedInButton from './components/loginButton/LinkedInButton';
 import Splash from './components/splash/splash';
 import Profile from './components/profile/profile';
+import Navigation from './components/navigation/navigation';
 import requestAPI from './services/api';
 import JWT from './services/jwt';
 class App extends Component {
@@ -11,6 +11,7 @@ class App extends Component {
         super(props)
         this.state = {
             authorized: null,
+            navigation: null
         };
     }
 
@@ -18,12 +19,22 @@ class App extends Component {
     componentDidMount(){
 
         JWT.loggedIn() ? 
-            this.setState({ authorized: true }) : 
+            this.setState({ authorized: true, navigation: 3 }) : 
             this.setState( { authorized: false } );
+    }
+
+    checkAuth(){
+
+    }
+    navigationUpdate(update){
+        this.setState({
+            navigation: update
+        });
     }
 
     // method called after successfull linkedin authentication 
     loginOrCreate(data){
+
         // removes any expired token from storage
         JWT.clearToken();
         // sends a request for an access token
@@ -42,25 +53,37 @@ class App extends Component {
         
         return (
             <div className="App">
-                <img src={logo} className="App-logo" alt="logo" />
-                <h1 className="App-title">Como se Taco Fart?</h1>
                 
                 {/* if there isn't a user logged in already show this */}
                 {!this.state.authorized && (
-                    <div>
-                        {/* passes the loginOrCreate method to the LoginButton */}
-                        <LinkedInButton loginOrCreate={this.loginOrCreate.bind(this)}/>
-                        <Splash />
-                    </div>
+                    <Splash loginOrCreate={this.loginOrCreate.bind(this)}/>
                 )}  
 
                 {/* if user is authorized show this */}        
                 {this.state.authorized && (
-                    <Profile/>
+                    <div>
+                        {this.state.navigation === 1 && (
+                            <div>1</div>
+                        )}
+                        {this.state.navigation === 2 && (
+                            <div>stop clickin around and build something ya deeeeeeuuussche</div>
+                        )}
+                        {this.state.navigation === 3 && (
+                            <Profile />
+                        )}
+                        {this.state.navigation === 4 && (
+                            <div>----------------------------------</div>
+                        )}
+                        {this.state.navigation === 5 && (
+                            <div>0---0---0--0--0</div>
+                        )}
+                        <Navigation navigationUpdate={this.navigationUpdate.bind(this)} />
+                    </div>
                 )}
             </div>
         );
     }
+
 }
 
 export default App;
