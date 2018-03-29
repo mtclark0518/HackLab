@@ -11,6 +11,7 @@ router.post('/access/request', Access.AccessRequest);
 
 // route 'api/profile' ------------------------------- *
 router.get('/api/profile', Auth.checkJWT, Api.getProfile);
+router.put('/api/profile', Auth.checkJWT, Api.updateProfile);
 
 
 
