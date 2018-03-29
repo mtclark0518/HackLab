@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Splash from './components/splash/splash';
 import Profile from './components/profile/profile';
@@ -54,7 +53,6 @@ class App extends Component {
         
         return (
             <div className="App">
-                
                 {/* if there isn't a user logged in already show this */}
                 {!this.state.authorized && (
                     <Splash loginOrCreate={this.loginOrCreate.bind(this)}/>
