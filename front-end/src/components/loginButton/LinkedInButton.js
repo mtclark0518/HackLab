@@ -13,8 +13,7 @@ class LinkedInButton extends Component {
 
     // after a sucesseful linkedInLogin
 	onLinkedIn(data){
-        console.log(data)
-        this.props.loginOrCreate(data)
+        this.props.loginOrCreate(data);
     }
 
     onError(error){
