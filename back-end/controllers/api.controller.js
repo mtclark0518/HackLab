@@ -1,7 +1,7 @@
 const db = require('../models/index');
 const Account = db.Account;
 const User = db.User;
-
+const Project = db.Project;
 
 // IN ALL API.CONTROLLER METHODS REQ.USER.ID WILL HOLD THE ACCOUNT_ID
 
@@ -22,6 +22,24 @@ const getProfile = (req, res) => {
     });
 };
 
+
+const getProject = ( req, res ) => {
+    // TODO
+}
+
+// Create new project
+const createProject = ( req, res ) => {
+    const proj = req.body;
+    console.log(proj)
+    // Project.create({
+        // TODO
+    // })
+    res.send('route was hit. for now thats it')
+}
+
+
+
 module.exports = {
-    getProfile
+    getProfile,
+    createProject
 };
