@@ -18,7 +18,7 @@ class Navigation extends Component {
     };
     const tempIconStyle = {
       display:'flex',
-      flexGrow:'2',
+      flexGrow:'1',
       justifyContent:'center'
     }
     return (
