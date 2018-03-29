@@ -103,7 +103,7 @@ class Profile extends Component {
               </label>
               <label>
                 Bio:
-                <input name="summary" value={this.state.user.headline || ''} onChange={this.updateProfile} /> 
+                <input name="headline" value={this.state.user.headline || ''} onChange={this.updateProfile} /> 
               </label>
               <label>
                 Industry: 
