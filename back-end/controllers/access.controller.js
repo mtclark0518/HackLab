@@ -86,8 +86,7 @@ const AccessRequest = (req, res) => {
         }
         else if (account) {
             console.log('account found. passing to login');
-            const acc = account.dataValues;
-            Login(acc);
+            Login(account.dataValues);
         }
     });
     // <<<----------------------------------------------------------------->>> //
