@@ -8,7 +8,7 @@ class Navigation extends Component {
   render() {
     // just here for easy editing
     const tempNavStyle = {
-      position: 'absolute',
+      position: 'fixed',
       bottom: '0',
       width: '100%',
       height: '10vh',
